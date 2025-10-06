@@ -1,0 +1,70 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    margin: 0;
+    padding: 0;
+}
+
+.kotak {
+    background: #fff;
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.judul {
+    text-align: center;
+    padding: 15px;
+    background: #0072ff;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.blok {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.blok img {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 4px solid #0072ff;
+    transition: transform 0.3s ease;
+}
+
+/* Animasi hover foto */
+.blok img:hover {
+    transform: scale(1.05);
+}
+
+.kanan table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.kanan th {
+    text-align: left;
+    padding: 6px;
+    color: #333;
+    width: 120px;
+}
+
+.kanan td {
+    padding: 6px;
+    color: #555;
+}
+
+.kanan a {
+    color: #0072ff;
+    text-decoration: none;
+}
+
+.kanan a:hover {
+    text-decoration: underline;
+}
