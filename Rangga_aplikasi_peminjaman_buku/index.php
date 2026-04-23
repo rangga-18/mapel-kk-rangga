@@ -1,41 +1,30 @@
 <?php
 session_start();
-include "login.php";
-
-$error = "";
+include "koneksi.php";
 
 if(isset($_POST['login'])){
-
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $data = mysqli_query($conn,"SELECT * FROM users 
-                                WHERE username='$username' 
-                                AND password='$password'");
+        WHERE username='$username' AND password='$password'");
 
-    $cek = mysqli_num_rows($data);
+    if(mysqli_num_rows($data) > 0){
+        $row = mysqli_fetch_assoc($data);
 
-    if($cek > 0){
-        $d = mysqli_fetch_array($data);
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['level'] = $row['level'];
 
-        $_SESSION['id'] = $d['id'];
-        $_SESSION['username'] = $d['username'];
-        $_SESSION['level'] = $d['level'];
-
-        // ARAHKAN SESUAI LEVEL
-        if($d['level'] == "admin"){
+        // 🔥 BEDA DASHBOARD
+        if($row['level'] == 'admin'){
             header("Location: dashboard_admin.php");
-        }
-        elseif($d['level'] == "petugas"){
-            header("Location: dashboard_petugas.php");
-        }
-        elseif($d['level'] == "peminjam"){
-            header("Location: dashboard_peminjam.php");
+        } else {
+            header("Location: dashboard_user.php");
         }
 
-        exit;
-    }else{
-        $error = "Username atau Password salah!";
+    } else {
+        echo "<script>alert('Login Gagal');</script>";
     }
 }
 ?>
@@ -51,14 +40,10 @@ if(isset($_POST['login'])){
 <div class="bg-white p-8 rounded-2xl shadow-2xl w-96">
 
     <h2 class="text-2xl font-bold text-center text-purple-700 mb-6">
-        📚 Login Sistem
+        Aplikasi Peminjaman Buku
     </h2>
 
-    <?php if($error != ""){ ?>
-        <div class="bg-red-100 text-red-600 p-2 rounded mb-4 text-center">
-            <?php echo $error; ?>
-        </div>
-    <?php } ?>
+
 
     <form method="POST">
 
@@ -80,7 +65,7 @@ if(isset($_POST['login'])){
         </button>
 
     </form>
-
+  <p>© 2026 Aplikasi Peminjaman Buku Dibuat oleh @Rian Dika Rangga Raditai</p>
 </div>
 
 </body>
